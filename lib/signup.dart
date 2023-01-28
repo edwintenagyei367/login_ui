@@ -8,6 +8,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  late bool _passwordVisible;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _passwordVisible = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,14 +120,24 @@ class _SignUpState extends State<SignUp> {
                             ),
                             child: TextField(
                               cursorColor: Colors.black,
-                              obscureText: true,
+                              obscureText: !_passwordVisible,
                               style: TextStyle(color: Colors.black,fontSize: 15),
                               decoration: InputDecoration(
                                 label: Text('Password'),
                                 labelStyle: TextStyle(fontSize: 15,color: Colors.black.withOpacity(0.4)),
                                 border: InputBorder.none,
-                                suffixText: 'View',
-                                suffixStyle: TextStyle(color: Colors.black)
+                                suffix: GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                  child: Text("View",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                )
+                                //suffixText: 'View',
+                                //suffixStyle: TextStyle(color: Colors.black)
                               ),
                             ),
                           ),
